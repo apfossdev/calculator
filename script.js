@@ -11,14 +11,15 @@ function multiply(operand_1, operand_2) {
 }
 
 function divide(operand_1, operand_2) {
+    if(operand_2 == 0) return "get a life buddy :|"
     return operand_1 / operand_2;
 }
 
-function operator(operand_1, operand_2, operator) {
-    if(operator == '+') add(operand_1,operand_2);
-    else if(operator == '-') subtract(operand_1,operand_2);
-    else if(operator == '*') multiply(operand_1,operand_2);
-    else divide(operand_1,operand_2);
+function operation(operand_1, operand_2, operator) {
+    if(operator == '+') return add(operand_1,operand_2);
+    else if(operator == '-') return subtract(operand_1,operand_2);
+    else if(operator == '*') return multiply(operand_1,operand_2);
+    else return divide(operand_1,operand_2);
 }
 
 let displayContent = document.getElementById("display");
@@ -39,6 +40,11 @@ let button_mul = document.getElementById("*");
 let button_div = document.getElementById("/");
 let button_result = document.getElementById("=");
 let button_clear = document.getElementById("clear");
+
+let operand_1 = 0;
+let operand_2 = 0;
+let operator = '';
+let result = 0;
 
 button_1.addEventListener("click",function () {
     displayContent.textContent += "1";
@@ -79,3 +85,70 @@ button_9.addEventListener("click",function () {
 button_0.addEventListener("click",function () {
     displayContent.textContent += "0";
 });
+
+button_add.addEventListener("click",function () {
+    if(operator !== '') {
+        operand_2 = Number(displayContent.textContent);
+        result = operation(operand_1, operand_2, operator);
+        operator = '';
+        displayContent.textContent = result;
+    }
+    operand_1 = Number(displayContent.textContent);
+    operator = '+';
+    displayContent.textContent = '';
+});
+
+button_sub.addEventListener("click",function () {
+    if(operator !== '') {
+        operand_2 = Number(displayContent.textContent);
+        result = operation(operand_1, operand_2, operator);
+        operator = '';
+        displayContent.textContent = result;
+    }
+    operand_1 = Number(displayContent.textContent);
+    operator = '-';
+    displayContent.textContent = '';
+    
+});
+
+button_mul.addEventListener("click",function () {
+    if(operator !== '') {
+        operand_2 = Number(displayContent.textContent);
+        result = operation(operand_1, operand_2, operator);
+        operator = '';
+        displayContent.textContent = result;
+    }
+    operand_1 = Number(displayContent.textContent);
+    operator = '*';
+    displayContent.textContent = '';
+    
+});
+
+button_div.addEventListener("click",function () {
+    if(operator !== '') {
+        operand_2 = Number(displayContent.textContent);
+        result = operation(operand_1, operand_2, operator);
+        operator = '';
+        displayContent.textContent = result;
+    }
+    operand_1 = Number(displayContent.textContent);
+    operator = '/';
+    displayContent.textContent = '';
+    
+});
+
+button_result.addEventListener("click",function () {
+    operand_2 = Number(displayContent.textContent);
+    result = operation(operand_1, operand_2, operator);
+    operator = '';
+    displayContent.textContent = result;
+});
+
+button_clear.addEventListener("click",function () {
+    operand_1 = 0;
+    operand_2 = 0;
+    operator = '';
+    result = 0;
+    displayContent.textContent = '';
+});
+
